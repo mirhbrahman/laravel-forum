@@ -71,7 +71,29 @@
             </div>
         </nav>
 
-        @yield('content')
+        <div class="container">
+            <div class="col-md-4">
+                <a class="btn btn-primary form-control" href="{{route('discussion.create')}}">Create new discussion</a>
+                <br><br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Channels
+                    </div>
+                    <div class="panel-body">
+                        @if ($channels)
+                            <ul class="list-group">
+                                @foreach ($channels as $channel)
+                                    <li class="list-group-item">{{$channel->title}}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                @yield('content')
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
