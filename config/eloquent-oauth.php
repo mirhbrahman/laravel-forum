@@ -19,9 +19,9 @@ return [
             'scope' => [],
         ],
         'github' => [
-            'client_id' => '12345678',
-            'client_secret' => 'y0ur53cr374ppk3y',
-            'redirect_uri' => 'https://example.com/your/github/redirect',
+            'client_id' => '7f194d90503737d255c7',
+            'client_secret' => 'e20ec4b8a831e58c3343c36d6fa10d95fef151d2',
+            'redirect_uri' => 'http://localhost/forum/public/github/redirect',
             'scope' => [],
         ],
         'linkedin' => [
