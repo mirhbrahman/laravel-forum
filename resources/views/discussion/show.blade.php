@@ -19,7 +19,8 @@
         </div>
 
         <div class="panel-footer">
-            <p>{{$d->replies->count()}} Replies</p>
+            <span>{{$d->replies->count()}} Replies</span>
+            <a href="{{route('channel',$d->channel->slug)}}" class="btn btn-xs btn-default pull-right">{{$d->channel->title}}</a>
         </div>
     </div>
 
@@ -37,10 +38,31 @@
                     </p>
                 </div>
                 <div class="panel-footer">
-                    <p>LIKE</p>
+                    @if ($r->is_like_by_auth_user())
+                        <a href="{{route('reply.unlike',['id'=>$r->id])}}" class="btn btn-xs btn-danger">Unlike</a> <span class="badge btn btn-xs btn-default">Likes: {{$r->likes->count()}}</span>
+                    @else
+                        <a href="{{route('reply.like',['id'=>$r->id])}}" class="btn btn-xs btn-success">Like <span class="badge">{{$r->likes->count()}}</span></a>
+                    @endif
                 </div>
             </div>
         @endforeach
     @endif
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @if (Auth::check())
+                {{Form::open(['route'=>['discussion.reply',$d->id],'method'=>'post'])}}
+                <label for="">Leave a reply...</label>
+                {{Form::textarea('content',null,['class'=>'form-control'])}}
+                <br>
+                {{Form::submit('Leave a reply',['class'=>'btn btn-info pull-right'])}}
+                {{Form::close()}}
+            @else
+                <div class="text-center">
+                    <h4>Sing in to leave a reply</h4>
+                </div>
+            @endif
+        </div>
+    </div>
 
 @endsection

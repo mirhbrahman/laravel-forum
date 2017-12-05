@@ -54,49 +54,57 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="container">
-            <div class="col-md-4">
-                <a class="btn btn-primary form-control" href="{{route('discussion.create')}}">Create new discussion</a>
-                <br><br>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Channels
-                    </div>
-                    <div class="panel-body">
-                        @if ($channels)
-                            <ul class="list-group">
-                                @foreach ($channels as $channel)
-                                    <li class="list-group-item">{{$channel->title}}</li>
-                                @endforeach
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
                             </ul>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                @yield('content')
+                        </li>
+                    @endif
+                </ul>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <div class="container">
+        <div class="col-md-4">
+            <a class="btn btn-primary form-control" href="{{route('discussion.create')}}">Create new discussion</a>
+            <br><br>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                        <ul class="list-group">
+                                <li class="list-group-item"><a href="{{route('forum')}}" style="text-decoration:none">Home</a></li>
+                        </ul>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Channels
+                </div>
+                <div class="panel-body">
+                    @if ($channels)
+                        <ul class="list-group">
+                            @foreach ($channels as $channel)
+                                <li class="list-group-item"><a href="{{route('channel',$channel->slug)}}" style="text-decoration:none">{{$channel->title}}</a></li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            @yield('content')
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Discussion;
+use App\Reply;
 use Session;
 use Auth;
 
@@ -37,4 +38,6 @@ class DiscussionsController extends Controller
         $d = Discussion::where('slug',$slug)->first();
         return view('discussion.show',compact('d'));
     }
+
+
 }

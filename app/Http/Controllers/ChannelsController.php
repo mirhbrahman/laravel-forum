@@ -40,7 +40,10 @@ class ChannelsController extends Controller
             'title' => 'required|min:2|max:150',
         ]);
 
-        if (Channel::create($request->all())) {
+        $input = $request->all();
+        $input['slug'] = str_slug($request->title);
+
+        if (Channel::create($input)) {
             Session::flash('success','Channel created.');
         }
 
@@ -82,8 +85,12 @@ class ChannelsController extends Controller
             'title' => 'required|min:2|max:150',
         ]);
 
+        $input = $request->all();
+        $input['slug'] = str_slug($request->title);
+
         $channel = Channel::find($id);
-        if ($channel->update($request->all())) {
+
+        if ($channel->update($input)) {
             Session::flash('success','Channel update successfull');
         }
 
