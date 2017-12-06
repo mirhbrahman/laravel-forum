@@ -36,8 +36,9 @@ class DiscussionsController extends Controller
     public function show($slug)
     {
         $d = Discussion::where('slug',$slug)->first();
-        return view('discussion.show',compact('d'));
+        $best_ans = $d->replies()->where('best_ans', 1)->first();
+        return view('discussion.show',compact('d','best_ans'));
     }
 
-
+    
 }

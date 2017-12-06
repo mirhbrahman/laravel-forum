@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('password')->nullable();
             $table->boolean('admin')->default(0);
+            $table->bigInteger('points')->default(50);
             $table->rememberToken();
             $table->timestamps();
         });

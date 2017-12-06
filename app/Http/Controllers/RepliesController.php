@@ -27,7 +27,9 @@ class RepliesController extends Controller
         $reply->content = $request->content;
 
         if ($reply->save()) {
-
+            //..........give te reply points
+            $reply->user->points += 25;
+            $reply->user->save();
             //..........notify watch user
             $watchers = array();
 
@@ -63,6 +65,20 @@ class RepliesController extends Controller
             Session::flash('success', 'You unliked the reply.');
         }
 
+        return redirect()->back();
+    }
+
+    public function bestAns($id)
+    {
+        $reply = Reply::find($id);
+        $reply->best_ans = 1;
+        if ($reply->save()) {
+            //..........give te reply points
+            $reply->user->points += 100;
+            $reply->user->save();
+
+            Session::flash('success', 'You has been marked as best answer.');
+        }
         return redirect()->back();
     }
 }
