@@ -6,11 +6,19 @@
             <img src="{{$d->user->avatar}}" alt="" width="40px" height="40px">&nbsp;&nbsp;&nbsp;
             <span>{{$d->user->name}} <b>({{$d->user->points}})</b> <b>{{$d->created_at->diffForHumans()}}</b></span>
 
+
             @if ($d->is_being_watch_by_auth_user())
-                <a href="{{route('discussion.unwatch',['id'=>$d->id])}}" class="pull-right btn btn-default">Unwatch</a>
+                <a href="{{route('discussion.unwatch',['id'=>$d->id])}}" class="pull-right btn btn-xs btn-default" style="margin-left:5px">Unwatch</a>
             @else
-                <a href="{{route('discussion.watch',['id'=>$d->id])}}" class="pull-right btn btn-default">Watch</a>
+                <a href="{{route('discussion.watch',['id'=>$d->id])}}" class="pull-right btn btn-xs btn-default" style="margin-left:5px">Watch</a>
             @endif
+
+            @if ($d->hasBestAns())
+                <span class="pull-right btn btn-xs btn-danger">Closed</span>
+            @else
+                <span class="pull-right btn btn-xs btn-success">Open</span>
+            @endif
+
         </div>
 
         <div class="panel-body">

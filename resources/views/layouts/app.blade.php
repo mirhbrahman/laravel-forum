@@ -78,9 +78,12 @@
             <br><br>
             <div class="panel panel-default">
                 <div class="panel-body">
-                        <ul class="list-group">
-                                <li class="list-group-item"><a href="{{route('forum')}}" style="text-decoration:none">Home</a></li>
-                        </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="{{route('forum')}}" style="text-decoration:none">Home</a></li>
+                        <li class="list-group-item"><a href="{{route('forum',['filter'=>'me'])}}" style="text-decoration:none">My Discussions</a></li>
+                        <li class="list-group-item"><a href="{{route('forum',['filter'=>'solved'])}}" style="text-decoration:none">Answered Discussions</a></li>
+                        <li class="list-group-item"><a href="{{route('forum',['filter'=>'unsolved'])}}" style="text-decoration:none">Unanswered Discussions</a></li>
+                    </ul>
                 </div>
             </div>
 
@@ -109,9 +112,9 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script type="text/javascript">
-    @if (Session::has('success'))
-        toastr.success('{{Session::get('success')}}');
-    @endif
+@if (Session::has('success'))
+toastr.success('{{Session::get('success')}}');
+@endif
 </script>
 </body>
 </html>
