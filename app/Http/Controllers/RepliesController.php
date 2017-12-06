@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\Reply;
 use App\Like;
+use App\Discussion;
 use Auth;
 use Session;
+use Notification;
 
 class RepliesController extends Controller
 {
@@ -16,12 +19,24 @@ class RepliesController extends Controller
             'content' => 'required|min:2|max:500',
         ]);
 
+        $d = Discussion::find($id);
+
         $reply = new Reply();
         $reply->user_id = Auth::id();
         $reply->discussion_id = $id;
         $reply->content = $request->content;
 
         if ($reply->save()) {
+
+            //..........notify watch user
+            $watchers = array();
+
+            foreach ($d->watchers as $w) {
+                array_push($watchers, User::find($w->user_id));
+            }
+
+            Notification::send($watchers, new \App\Notifications\NewReplyAdded($d));
+
             Session::flash('success', 'Replied to discussion.');
         }
 
