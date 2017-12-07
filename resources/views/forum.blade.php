@@ -24,7 +24,7 @@
                     </h4>
 
                     <p>
-                        {{str_limit($d->content,150)}}
+                        {!! Markdown::convertToHtml(str_limit($d->content,150)) !!}
                     </p>
                 </div>
 
