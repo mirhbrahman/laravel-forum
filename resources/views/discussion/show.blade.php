@@ -34,7 +34,7 @@
             </h4>
             <hr>
             <p>
-                {{$d->content}}
+                {!! Markdown::convertToHtml($d->content) !!}
             </p>
 
             @if ($best_ans)
@@ -49,7 +49,7 @@
 
                         <div class="panel-body">
                             <p>
-                                {{$best_ans->content}}
+                                {!! Markdown::convertToHtml($best_ans->content) !!}
                             </p>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
 
                 <div class="panel-body">
                     <p>
-                        {{$r->content}}
+                        {!! Markdown::convertToHtml($r->content) !!}
                     </p>
                 </div>
                 <div class="panel-footer">

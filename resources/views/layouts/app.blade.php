@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css">
 </head>
 <body>
     <div id="app">
@@ -87,7 +88,7 @@
                         @endif
                     </ul>
                 </div>
-                
+
                 @if (Auth::check())
                     @if (Auth::user()->admin)
                         <div class="panel-body">
@@ -128,5 +129,7 @@
 toastr.success('{{Session::get('success')}}');
 @endif
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
