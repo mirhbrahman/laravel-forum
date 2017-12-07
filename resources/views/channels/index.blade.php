@@ -6,6 +6,8 @@
         <div class="panel-heading">Channels</div>
 
         <div class="panel-body">
+            <a href="{{route('channels.create')}}" class="btn btn-xs btn-primary">Add New Channel</a>
+            <hr>
             <table class="table table-hover">
                 <thead>
                     <th>Name</th>
