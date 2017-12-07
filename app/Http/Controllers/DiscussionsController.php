@@ -18,7 +18,7 @@ class DiscussionsController extends Controller
     {
         $this->validate($request,[
             'channel_id' => 'required',
-            'title' => 'required|min:2|max:150',
+            'title' => 'required|min:2|max:150|unique:discussions',
             'content' => 'required',
         ]);
 
@@ -40,5 +40,24 @@ class DiscussionsController extends Controller
         return view('discussion.show',compact('d','best_ans'));
     }
 
-    
+    public function edit($slug)
+    {
+        return view('discussion.edit')->with('discussion', Discussion::where('slug',$slug)->first());
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+            'content' => 'required',
+        ]);
+        $d = Discussion::find($id);
+        if ($d->update($request->all())) {
+            Session::flash('success','Discussion update successfull.');
+        }
+
+        return redirect()->route('discussion.show',$d->slug);
+
+    }
+
+
 }

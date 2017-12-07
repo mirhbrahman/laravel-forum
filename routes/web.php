@@ -55,6 +55,16 @@ Route::group(['middleware'=>'auth'],function(){
         'as' => 'discussion.store',
     ]);
 
+    Route::get('discussion/edit/{slug}',[
+        'uses' => 'DiscussionsController@edit',
+        'as' => 'discussion.edit',
+    ]);
+
+    Route::put('discussion/update/{id}',[
+        'uses' => 'DiscussionsController@update',
+        'as' => 'discussion.update',
+    ]);
+
     Route::post('discussion/reply/{id}',[
         'uses' => 'RepliesController@reply',
         'as' => 'discussion.reply',
@@ -82,7 +92,18 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::get('discussion/best/reply/{id}',[
         'uses' => 'RepliesController@bestAns',
-        'as' => 'discussion.best.ans',
+        'as' => 'reply.best.ans',
     ]);
+
+    Route::get('reply/edit/{id}',[
+        'uses' => 'RepliesController@edit',
+        'as' => 'reply.edit',
+    ]);
+
+    Route::put('reply/update/{id}',[
+        'uses' => 'RepliesController@update',
+        'as' => 'reply.update',
+    ]);
+
 
 });

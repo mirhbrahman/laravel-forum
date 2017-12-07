@@ -6,6 +6,11 @@
             <img src="{{$d->user->avatar}}" alt="" width="40px" height="40px">&nbsp;&nbsp;&nbsp;
             <span>{{$d->user->name}} <b>({{$d->user->points}})</b> <b>{{$d->created_at->diffForHumans()}}</b></span>
 
+            @if (Auth::id() == $d->user_id)
+                @if (!$d->hasBestAns())
+                    <a href="{{route('discussion.edit',['slug'=>$d->slug])}}" class="pull-right btn btn-xs btn-info" style="margin-left:5px">Edit</a>
+                @endif
+            @endif
 
             @if ($d->is_being_watch_by_auth_user())
                 <a href="{{route('discussion.unwatch',['id'=>$d->id])}}" class="pull-right btn btn-xs btn-default" style="margin-left:5px">Unwatch</a>
@@ -18,6 +23,8 @@
             @else
                 <span class="pull-right btn btn-xs btn-success">Open</span>
             @endif
+
+
 
         </div>
 
@@ -63,9 +70,15 @@
                     <img src="{{$r->user->avatar}}" alt="" width="40px" height="40px">&nbsp;&nbsp;&nbsp;
                     <span>{{$r->user->name}} <b>({{$r->user->points}})</b> <b>{{$r->created_at->diffForHumans()}}</b></span>
 
+                    @if (Auth::id() == $r->user_id)
+                        @if (!$r->best_ans)
+                            <a class="btn btn-xs btn-info pull-right" href="{{route('reply.edit',$r->id)}}">Edit</a>
+                        @endif
+                    @endif
+
                     @if (!$best_ans)
                         @if (Auth::id() == $d->user_id)
-                            <a class="btn btn-xs btn-info pull-right" href="{{route('discussion.best.ans',$r->id)}}">Mark as best answer</a>
+                            <a style="margin-right:5px" class="btn btn-xs btn-primary pull-right" href="{{route('reply.best.ans',$r->id)}}">Mark as best answer</a>
                         @endif
                     @endif
 

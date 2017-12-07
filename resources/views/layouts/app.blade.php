@@ -80,11 +80,23 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         <li class="list-group-item"><a href="{{route('forum')}}" style="text-decoration:none">Home</a></li>
-                        <li class="list-group-item"><a href="{{route('forum',['filter'=>'me'])}}" style="text-decoration:none">My Discussions</a></li>
-                        <li class="list-group-item"><a href="{{route('forum',['filter'=>'solved'])}}" style="text-decoration:none">Answered Discussions</a></li>
-                        <li class="list-group-item"><a href="{{route('forum',['filter'=>'unsolved'])}}" style="text-decoration:none">Unanswered Discussions</a></li>
+                        @if (Auth::check())
+                            <li class="list-group-item"><a href="{{route('forum',['filter'=>'me'])}}" style="text-decoration:none">My Discussions</a></li>
+                            <li class="list-group-item"><a href="{{route('forum',['filter'=>'solved'])}}" style="text-decoration:none">Answered Discussions</a></li>
+                            <li class="list-group-item"><a href="{{route('forum',['filter'=>'unsolved'])}}" style="text-decoration:none">Unanswered Discussions</a></li>
+                        @endif
                     </ul>
                 </div>
+                
+                @if (Auth::check())
+                    @if (Auth::user()->admin)
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item"><a href="{{route('channels.index')}}" style="text-decoration:none">All Channels</a></li>
+                            </ul>
+                        </div>
+                    @endif
+                @endif
             </div>
 
             <div class="panel panel-default">
